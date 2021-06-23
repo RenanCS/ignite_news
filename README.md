@@ -25,9 +25,9 @@ O projeto consiste em uma solução web para apresentar "news" utilizando:
 - Prismic CMS (painel adm "wordpress");
 - GitHub (Para autenticar OAuth);
 
-Site: https://rcstiignitenews.netlify.app/
+Site: rcsti-ignitenews.netlify.app
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cde83e8c-fa15-4e77-b7ba-074e5b3caedf/deploy-status)](https://app.netlify.com/sites/rcstiignitenews/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cde83e8c-fa15-4e77-b7ba-074e5b3caedf/deploy-status)](https://app.netlify.com/sites/rcsti-ignitenews/deploys)
 
 
 
