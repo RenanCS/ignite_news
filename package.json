@@ -6,12 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "yarn run build && yarn run export",
-    "postbuild": "next-on-netlify"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^3.4.2",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
