@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "yarn run build && yarn run export"
+    "deploy": "yarn run build && yarn run export",
+    "postbuild": "next-on-netlify"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^3.4.2",
