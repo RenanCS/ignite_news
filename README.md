@@ -27,6 +27,10 @@ O projeto consiste em uma solução web para apresentar "news" utilizando:
 
 Site: https://rcstiignitenews.netlify.app/
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cde83e8c-fa15-4e77-b7ba-074e5b3caedf/deploy-status)](https://app.netlify.com/sites/rcstiignitenews/deploys)
+
+
+
 ---
 
 ## ⚙️ Funcionalidades
