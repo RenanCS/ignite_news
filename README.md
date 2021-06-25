@@ -82,6 +82,5 @@ $ yarn start
 - **[FaunaDB](https://fauna.com/)**
 - **[PrismicCSM](https://prismic.io/)**
 - **[Github](https://github.com/)**
-- **[Styled-Components](https://styled-components.com/)**
 
 
