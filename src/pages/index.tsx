@@ -1,6 +1,8 @@
 import Head from 'next/head';
-import { SubscribeButton } from '../components/SubscribeButton';
+import Image from 'next/image';
+import imgAvatar from 'assets/images/avatar.svg';
 import styles from './home.module.scss';
+import { SubscribeButton } from '../components/SubscribeButton';
 
 export default function Home() {
   return (
@@ -18,7 +20,7 @@ export default function Home() {
           </p>
           <SubscribeButton />
         </section>
-        <img src={`images/avatar.svg`} alt="Girl coding" />
+        <Image src={imgAvatar} alt="Girl coding" />
       </main>
     </>
   )
