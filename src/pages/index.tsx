@@ -1,10 +1,20 @@
+import { GetServerSideProps, GetStaticPropsResult } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import imgAvatar from 'assets/images/avatar.svg';
 import styles from './home.module.scss';
 import { SubscribeButton } from '../components/SubscribeButton';
+import { stripe } from 'services/stripe';
+import { FormatAmount } from 'helper/formater';
 
-export default function Home() {
+interface HomeProps {
+  product: {
+    priceId: string;
+    amount: number;
+  }
+}
+
+export default function Home({product}: HomeProps) {
   return (
     <>
       <Head>
@@ -16,12 +26,29 @@ export default function Home() {
           <h1>New about the <span>React</span> world. </h1>
           <p>
             Get acess to all the publications <br />
-            <span>for $9.90 month</span>
+            <span>for {FormatAmount(product.amount)} month</span>
           </p>
-          <SubscribeButton />
+          <SubscribeButton priceId={product.priceId} />
         </section>
         <Image src={imgAvatar} alt="Girl coding" />
       </main>
     </>
   )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (): Promise<GetStaticPropsResult<HomeProps>> => {
+
+  const price = await stripe.prices.retrieve('price_1J89AHDEreH9cN5raVkTPhN8')
+
+  const product = {
+    priceId: price.id,
+    amount: (price.unit_amount / 100)
+  }
+
+  return {
+    props: {
+      product
+    }
+  }
 }
