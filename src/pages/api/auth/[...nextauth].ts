@@ -3,7 +3,6 @@ import Providers from 'next-auth/providers';
 
 
 export default NextAuth({
-
     providers: [
         Providers.GitHub({
             clientId: process.env.GITHUB_ID,
