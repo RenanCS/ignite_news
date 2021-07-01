@@ -1,0 +1,7 @@
+**/*.js
+/*.js
+node_modules
+storybook-static
+build
+/src/react-app-env.d.ts
+/src/reportWebVitals.ts
