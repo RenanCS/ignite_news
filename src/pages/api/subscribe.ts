@@ -15,6 +15,8 @@ type User = {
 
 const checkoutSession = async (request: NextApiRequest, response: NextApiResponse) => {
   console.log(request);
+  response.setHeader('Cache-Control','s-maxage=10, stale-while-revalidate');
+
   if (request.method === 'POST') {
     const session = await getSession({ req: request });
 
