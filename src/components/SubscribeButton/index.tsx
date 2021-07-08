@@ -20,6 +20,7 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
 
       await stripe.redirectToCheckout({sessionId: sessionId});
     } catch (err) {
+      console.log(`${err}`);
       alert(err.message);
     }
 
