@@ -14,6 +14,7 @@ type User = {
 }
 
 const checkoutSession = async (request: NextApiRequest, response: NextApiResponse) => {
+  console.log(request);
   if (request.method === 'POST') {
     const session = await getSession({ req: request });
 
