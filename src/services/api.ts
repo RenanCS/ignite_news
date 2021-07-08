@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const base = process.env.BASE_URL;
+
 export const api = axios.create({
-  baseURL: `${process.env.BASE_URL}/api`
+  baseURL: `https://rcsti-ignite-news.vercel.app/api`
 });
