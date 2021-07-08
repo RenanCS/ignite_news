@@ -13,18 +13,18 @@ type User = {
   }
 }
 
-const checkoutSession = async (request: NextApiRequest, response: NextApiResponse) => {
+const checkoutSession = async (req, res) => {
   let msg = "";
   try {
 
 
-    msg = `1-checkoutSession => ${request}`;
-    response.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate');
+    msg = `1-checkoutSession => ${req}`;
+    req.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate');
 
-    if (request.method === 'POST') {
-      msg = `2-checkoutSession => ${request}`;
+    if (req.method === 'POST') {
+      msg = `2-checkoutSession => ${req}`;
 
-      const session = await getSession({ req: request });
+      const session = await getSession({ req });
       msg = `3-checkoutSession => ${session}`;
 
       //buscar usuário cadastrado no faunadb
@@ -82,15 +82,15 @@ const checkoutSession = async (request: NextApiRequest, response: NextApiRespons
       msg = `9-checkoutSession sucess => ${process.env.STRIPE_SUCESS_URL}`;
       msg = `10-checkoutSession error => ${process.env.STRIPE_CANCEL_URL}`;
 
-      return response.status(200).json({ sessionId: checkoutStripeSession.id });
+      return res.status(200).json({ sessionId: checkoutStripeSession.id });
     } else {
-      response.setHeader('Allow', 'POST');
-      return response.status(405).end('Somente é permitido POST');
+      res.setHeader('Allow', 'POST');
+      return res.status(405).end('Somente é permitido POST');
     }
   }
   catch (err) {
-    return response.status(500).end(`Erro Acontecendo => ${msg + err.message}`);
+    return res.status(500).end(`Erro Acontecendo => ${msg + err.message}`);
   }
 }
 
-export default checkoutSession;
+ checkoutSession;
