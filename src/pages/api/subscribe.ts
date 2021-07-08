@@ -66,7 +66,7 @@ const checkoutSession = async (request: NextApiRequest, response: NextApiRespons
     return response.status(200).json({ sessionId: checkoutStripeSession.id });
   } else {
     response.setHeader('Allow', 'POST');
-    return response.status(405).end('Method not allowed');
+    return response.status(405).end('Somente é permitido POST');
   }
 }
 
