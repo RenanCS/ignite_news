@@ -11,6 +11,10 @@ export default NextAuth({
       scope: 'read:user'
     }),
   ],
+  session: {
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60
+  },
   callbacks: {
     async signIn(user, account, profile) {
       const { email } = user;
@@ -42,6 +46,9 @@ export default NextAuth({
       } catch {
         return false;
       }
+    },
+    session: async(session, token) => {
+      return session
     }
   }
 });
