@@ -14,14 +14,18 @@ type User = {
 }
 
 const checkoutSession = async (request: NextApiRequest, response: NextApiResponse) => {
-  console.log(`1-checkoutSession => ${request}`);
-  response.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate');
+  let msg = "";
+  try {
 
-  if (request.method === 'POST') {
-      console.log(`2-checkoutSession => ${request}`);
+
+    msg = `1-checkoutSession => ${request}`;
+    response.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate');
+
+    if (request.method === 'POST') {
+      msg = `2-checkoutSession => ${request}`;
 
       const session = await getSession({ req: request });
-      console.log(`3-checkoutSession => ${session}`);
+      msg = `3-checkoutSession => ${session}`;
 
       //buscar usuário cadastrado no faunadb
       const user = await fauna.query<User>(
@@ -32,19 +36,19 @@ const checkoutSession = async (request: NextApiRequest, response: NextApiRespons
           )
         )
       );
-      console.log(`4-checkoutSession => ${user}`);
+      msg = `4-checkoutSession => ${user}`;
 
       let customerId = user.data.stripe_customer_id;
 
       if (!customerId) {
-        console.log(`5-checkoutSession => ${customerId}`);
+        msg = `5-checkoutSession => ${customerId}`;
 
         // criar o usuário no stripe
         const stripeCustomer = await stripe.customers.create({
           email: session.user.email
         });
 
-        console.log(`6-checkoutSession => ${stripeCustomer}`);
+        msg = `6-checkoutSession => ${stripeCustomer}`;
 
         // salvar a referência do fauna, vinculado ao usuário no faunadb
         await fauna.query(
@@ -57,7 +61,7 @@ const checkoutSession = async (request: NextApiRequest, response: NextApiRespons
             }
           )
         )
-        console.log(`7-checkoutSession => ${stripeCustomer}`);
+        msg = `7-checkoutSession => ${stripeCustomer}`;
 
         customerId = stripeCustomer.id;
       }
@@ -74,14 +78,18 @@ const checkoutSession = async (request: NextApiRequest, response: NextApiRespons
         success_url: process.env.STRIPE_SUCESS_URL,
         cancel_url: process.env.STRIPE_CANCEL_URL
       });
-      console.log(`8-checkoutSession => ${checkoutStripeSession}`);
-      console.log(`9-checkoutSession sucess => ${process.env.STRIPE_SUCESS_URL}`);
-      console.log(`10-checkoutSession error => ${process.env.STRIPE_CANCEL_URL}`);
+      msg = `8-checkoutSession => ${checkoutStripeSession}`;
+      msg = `9-checkoutSession sucess => ${process.env.STRIPE_SUCESS_URL}`;
+      msg = `10-checkoutSession error => ${process.env.STRIPE_CANCEL_URL}`;
 
       return response.status(200).json({ sessionId: checkoutStripeSession.id });
-  } else {
-    response.setHeader('Allow', 'POST');
-    return response.status(405).end('Somente é permitido POST');
+    } else {
+      response.setHeader('Allow', 'POST');
+      return response.status(405).end('Somente é permitido POST');
+    }
+  }
+  catch (err) {
+    return response.status(500).end(`Erro Acontecendo => ${msg + err.message}`);
   }
 }
 
