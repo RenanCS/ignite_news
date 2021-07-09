@@ -12,8 +12,10 @@ export default NextAuth({
     }),
   ],
   session: {
-    jwt: true,
-    maxAge: 30 * 24 * 60 * 60
+    jwt: true
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET
   },
   callbacks: {
     async signIn(user, account, profile) {
@@ -47,8 +49,5 @@ export default NextAuth({
         return false;
       }
     },
-    session: async(session, token) => {
-      return session
-    }
   }
 });
