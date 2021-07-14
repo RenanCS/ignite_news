@@ -1,4 +1,3 @@
-import Bugsnag from "@bugsnag/js";
 import { NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "services/stripe";
 import { Readable } from 'stream';
