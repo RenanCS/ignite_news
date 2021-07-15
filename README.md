@@ -1,28 +1,28 @@
 <h1 align="center">
-  Ignite News 
+  Ignite News
 </h1>
 
-<h4 align="center"> 
+<h4 align="center">
 	🚧  Ignite ♻️ Em Andamento 🚀 🚧
 </h4>
 
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#-funcionalidades">Funcionalidades</a> •
- <a href="#-como-executar-o-projeto">Como executar</a> • 
- <a href="#-tecnologias">Tecnologias</a> • 
- <a href="#-contribuidores">Contribuidores</a> • 
- <a href="#-autor">Autor</a> • 
+ <a href="#-como-executar-o-projeto">Como executar</a> •
+ <a href="#-tecnologias">Tecnologias</a> •
+ <a href="#-contribuidores">Contribuidores</a> •
+ <a href="#-autor">Autor</a> •
  <a href="#user-content--licença">Licença</a>
 </p>
 
 ## 💻 Sobre o projeto
 
-O projeto consiste em uma solução web para apresentar "news" utilizando: 
+O projeto consiste em uma solução web para apresentar "news" utilizando:
 - Nextjs;
 - Stripe (Infra de pagamentos);
 - FaunaDB (Banco de dados serverless);
-- Prismic CMS (painel adm "wordpress");
+- JAMStack CMS (painel adm "wordpress");
 - GitHub (Para autenticar OAuth);
 
 Site: rcsti-ignite-news.vercel.app
@@ -31,9 +31,10 @@ Site: rcsti-ignite-news.vercel.app
 
 ## ⚙️ Funcionalidades
 
-- [ ] Login via github
+- [X] Login via github
 - [ ] Listar news
-
+- [X] Aplicar pagamentos via subscrição
+- [ ] Painel administrativo CMS (Dashboard)
 ---
 
 ## 🚀 Como executar o projeto

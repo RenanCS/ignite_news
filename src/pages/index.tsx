@@ -1,17 +1,13 @@
+import imgAvatar from 'assets/images/avatar.svg';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import imgAvatar from 'assets/images/avatar.svg';
-import styles from './home.module.scss';
+import { getProductStripe, ProductStripe } from 'services/stripe';
 import { SubscribeButton } from '../components/SubscribeButton';
-import { stripe } from 'services/stripe';
-import { FormatAmount } from 'helper/formater';
+import styles from './home.module.scss';
 
 interface HomeProps {
-  product: {
-    priceId: string;
-    amount: number;
-  }
+  product: ProductStripe
 }
 
 export default function Home({product}: HomeProps) {
@@ -26,7 +22,7 @@ export default function Home({product}: HomeProps) {
           <h1>New about the <span>React</span> world. </h1>
           <p>
             Get acess to all the publications <br />
-            <span>for {FormatAmount(product.amount)} month</span>
+            <span>for {product.amount} month</span>
           </p>
           <SubscribeButton priceId={product.priceId} />
         </section>
@@ -38,17 +34,11 @@ export default function Home({product}: HomeProps) {
 
 
 export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsResult<HomeProps>> => {
-
-  const price = await stripe.prices.retrieve('price_1J89AHDEreH9cN5raVkTPhN8')
-
-  const product = {
-    priceId: price.id,
-    amount: (price.unit_amount / 100)
-  }
+  const productStripe = await getProductStripe();
 
   return {
     props: {
-      product
+     product: productStripe
     },
     revalidate:60*60*24, // 24 horas
   }

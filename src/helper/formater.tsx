@@ -4,3 +4,11 @@ export function FormatAmount(value: number){
         currency: 'USD'})
         .format(value);
 }
+
+export function FormatDatePost(value: string){
+  return new Date(value).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year:'numeric'
+  })
+}
