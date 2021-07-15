@@ -1,8 +1,18 @@
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import Head from 'next/head';
 import { getPostsPrimic } from 'services/prismic';
-import { IPostsProps } from './interface';
 import styles from './styles.module.scss';
+
+export interface IPost {
+  slug: string,
+  title: string,
+  excerpt: string,
+  updatedAt:string
+}
+export interface IPostsProps {
+  posts: IPost[]
+}
+
 
 export default function Posts({ posts }: IPostsProps) {
   return (

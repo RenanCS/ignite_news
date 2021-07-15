@@ -1,6 +1,6 @@
 import Prismic from '@prismicio/client'
 import { FormatDatePost } from 'helper/formater';
-import { IPost, IPostsProps } from 'pages/posts/interface';
+import { IPost } from 'pages/posts';
 import { RichText } from 'prismic-dom';
 
 export function getPrismicClient(req?: unknown) {
