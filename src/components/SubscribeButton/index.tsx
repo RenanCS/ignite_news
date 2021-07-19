@@ -1,4 +1,5 @@
 import { signIn, useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import { api } from 'services/api';
 import { getStripeJS } from 'services/stripe-js';
 import { SubscribeButtonProps } from './interface';
@@ -6,6 +7,11 @@ import styles from './styles.module.scss';
 
 export function SubscribeButton({ priceId }: SubscribeButtonProps) {
   const [session] = useSession();
+  const router = useRouter();
+
+  if (session?.activeSubscription) {
+    router.push('/posts');
+  }
 
   async function handleSubscribe() {
     if (!session) {
@@ -18,7 +24,7 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
       const { sessionId } = response.data;
       const stripe = await getStripeJS();
 
-      await stripe.redirectToCheckout({sessionId});
+      await stripe.redirectToCheckout({ sessionId });
     } catch (err) {
       console.log(`SubscribeButton => ${err}`);
       alert(err.message);
@@ -34,7 +40,5 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
     >
       Subscribe now
     </button>
-
-
   );
 }

@@ -26,6 +26,7 @@ export async function getPostsPrimic(): Promise<IPost[]> {
   })
 
   const posts = response.results.map(post => {
+    console.dir(post);
 
     return {
       slug: post.uid,
@@ -36,4 +37,41 @@ export async function getPostsPrimic(): Promise<IPost[]> {
   });
 
   return posts;
+}
+
+export async function getPostPreview(slug: string): Promise<IPost>{
+  const prismic = getPrismicClient();
+
+  const response = await prismic.getByUID('publication', slug, {});
+
+  const post: IPost =
+    {
+      slug: slug,
+      title: RichText.asText(response.data.title),
+      content: RichText.asHtml(response.data.content.splice(0,3)  ),
+      updatedAt: FormatDatePost(response.last_publication_date)
+    };
+
+
+  return post;
+}
+
+export async function getPostPrimic(slug: string): Promise<IPost> {
+  const prismic = getPrismicClient();
+
+  const response = await prismic.getByUID('publication', slug, {});
+
+  console.dir(response);
+
+  const post: IPost =
+    {
+      slug: slug,
+      title: RichText.asText(response.data.title),
+      content: RichText.asHtml(response.data.content),
+      updatedAt: FormatDatePost(response.last_publication_date),
+      linkMedium: response.data.link_medium?.url ?? ''
+    };
+
+
+  return post;
 }
