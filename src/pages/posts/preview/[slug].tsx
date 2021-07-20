@@ -19,6 +19,7 @@ export default function PostPreview({ post }: IPostsProps) {
       router.push(`/posts/${post.slug}`);
       return;
     }
+    router.push(`/posts/${post.slug}`);
 
   }, [post.slug, router, session])
 
