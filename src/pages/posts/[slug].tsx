@@ -5,8 +5,6 @@ import { getSession, useSession } from "next-auth/client";
 import { getPostPrimic } from "services/prismic";
 import { IPostsProps } from '.';
 import styles from './post.module.scss';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export default function Post({ post }: IPostsProps) {
   return (
@@ -33,8 +31,7 @@ export default function Post({ post }: IPostsProps) {
 export const getServerSideProps: GetServerSideProps = async ({ req, params }): Promise<GetServerSidePropsResult<IPostsProps>> => {
   const session = await getSession({ req });
   const { slug } = params;
-  console.log(`getServerSideProps: ${session}`)
-  console.dir(session)
+
 
   if (session?.activeSubscription === undefined) {
     return {
