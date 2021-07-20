@@ -13,8 +13,8 @@ export default function Post({ post }: IPostsProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if(!session?.activeSubscription){
-      router.push(`/posts`);
+    if(session?.activeSubscription === undefined){
+      router.push(`/posts/preview/${post.slug}`);
       return;
     }
 
@@ -45,9 +45,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
   const session = await getSession({ req });
   const { slug } = params;
 
-  console.log(session?.activeSubscription);
-
-  if (session?.activeSubscription == null) {
+  if (session?.activeSubscription === undefined) {
     return {
       redirect: {
         destination: '/',
