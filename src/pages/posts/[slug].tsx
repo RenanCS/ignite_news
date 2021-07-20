@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import jwt from 'next-auth/jwt';
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { getSession, useSession } from "next-auth/client";
 import { getPostPrimic } from "services/prismic";
@@ -48,6 +49,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
   const { slug } = params;
 
   console.log(`Post getServerSideProps: ${session?.activeSubscription}`)
+  console.dir(session)
+  console.log(` ${session?.activeSubscription}`)
+
   if (session?.activeSubscription === undefined) {
     return {
       redirect: {
