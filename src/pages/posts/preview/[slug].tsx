@@ -14,6 +14,7 @@ export default function PostPreview({ post }: IPostsProps) {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(`Session:${session}`);
     if(session?.activeSubscription){
       router.push(`/posts/${post.slug}`);
       return;
@@ -54,9 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }): Promise<GetSta
   const { slug } = params;
 
   const post = await getPostPreview(String(slug));
-  const postProps: IPostsProps = {
-    post: post
-  }
+
   return {
     props: {
       post

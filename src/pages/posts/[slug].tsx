@@ -42,9 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
   }
 
   const post = await getPostPrimic(String(slug));
-  const postProps: IPostsProps = {
-    post: post
-  }
+
   return {
     props: {
       post

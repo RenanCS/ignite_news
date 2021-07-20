@@ -32,9 +32,11 @@ Site: rcsti-ignite-news.vercel.app
 ## ⚙️ Funcionalidades
 
 - [X] Login via github
-- [ ] Listar news
+- [X] Listar news
+- [X] Visualizar preview de news
+- [ ] Visuaizar news
 - [X] Aplicar pagamentos via subscrição
-- [ ] Painel administrativo CMS (Dashboard)
+- [X] Consumir posts CMS (Prismic)
 ---
 
 ## 🚀 Como executar o projeto

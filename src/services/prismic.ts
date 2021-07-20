@@ -26,8 +26,6 @@ export async function getPostsPrimic(): Promise<IPost[]> {
   })
 
   const posts = response.results.map(post => {
-    console.dir(post);
-
     return {
       slug: post.uid,
       title: RichText.asText(post.data.title),
@@ -60,8 +58,6 @@ export async function getPostPrimic(slug: string): Promise<IPost> {
   const prismic = getPrismicClient();
 
   const response = await prismic.getByUID('publication', slug, {});
-
-  console.dir(response);
 
   const post: IPost =
     {
