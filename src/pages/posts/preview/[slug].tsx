@@ -14,12 +14,13 @@ export default function PostPreview({ post }: IPostsProps) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(`Session:${session}`);
+    console.dir(session);
+    router.push(`/posts/${post.slug}`);
+
     if(session?.activeSubscription){
       router.push(`/posts/${post.slug}`);
       return;
     }
-    router.push(`/posts/${post.slug}`);
 
   }, [post.slug, router, session])
 
