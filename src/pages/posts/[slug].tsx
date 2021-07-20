@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import jwt from 'next-auth/jwt';
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { getSession, useSession } from "next-auth/client";
 import { getPostPrimic } from "services/prismic";
@@ -10,18 +9,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export default function Post({ post }: IPostsProps) {
-  const [session] = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log(`Post useEffect: ${session?.activeSubscription}`)
-    if (session?.activeSubscription === undefined) {
-      router.push(`/posts/preview/${post.slug}`);
-      return;
-    }
-
-  }, [post.slug, router, session])
-
   return (
     <>
       <Head>
@@ -44,9 +31,21 @@ export default function Post({ post }: IPostsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }): Promise<GetServerSidePropsResult<IPostsProps>> => {
+  const session = await getSession({ req });
   const { slug } = params;
+  console.log(`getServerSideProps: ${session}`)
+  console.dir(session)
 
-   const post = await getPostPrimic(String(slug));
+  if (session?.activeSubscription === undefined) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  const post = await getPostPrimic(String(slug));
 
   return {
     props: {
@@ -54,3 +53,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
     }
   }
 }
+
