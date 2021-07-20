@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
   const session = await getSession({ req });
   const { slug } = params;
 
-  if (!session?.activeSubscription) {
+  if (session?.activeSubscription === null) {
     console.log(!session?.activeSubscription);
     console.log("entrou aqui ")
     return {
