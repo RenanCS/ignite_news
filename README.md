@@ -11,6 +11,7 @@
  <a href="#-funcionalidades">Funcionalidades</a> •
  <a href="#-como-executar-o-projeto">Como executar</a> •
  <a href="#-tecnologias">Tecnologias</a> •
+ <a href="#-problemas-encontrados">Problemas encontrados</a> •
  <a href="#-contribuidores">Contribuidores</a> •
  <a href="#-autor">Autor</a> •
  <a href="#user-content--licença">Licença</a>
@@ -34,7 +35,7 @@ Site: rcsti-ignite-news.vercel.app
 - [X] Login via github
 - [X] Listar news
 - [X] Visualizar preview de news
-- [ ] Visuaizar news
+- [X] Visuaizar news
 - [X] Aplicar pagamentos via subscrição
 - [X] Consumir posts CMS (Prismic)
 ---
@@ -72,6 +73,11 @@ $ yarn start
 
 ```
 ---
+
+## ❌Problemas encontrados
+* [On every page refresh session is always false](https://github.com/nextauthjs/next-auth/discussions/704)
+* [How to use cookies for persisting users in Nextjs](https://dev.to/debosthefirst/how-to-use-cookies-for-persisting-users-in-nextjs-4617)
+
 
 ## 🛠 Tecnologias
 
