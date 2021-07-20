@@ -44,9 +44,11 @@ export default function Post({ post }: IPostsProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }): Promise<GetServerSidePropsResult<IPostsProps>> => {
-  const session = await getSession({ req });
-  const { slug } = params;
+export const getServerSideProps: GetServerSideProps = async (context): Promise<GetServerSidePropsResult<IPostsProps>> => {
+  const session = await getSession(context);
+  console.log(context);
+
+  // const { slug } = params;
 
   console.log(`Post getServerSideProps: ${session?.activeSubscription}`)
   console.dir(session)
@@ -61,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }): P
     }
   }
 
-  const post = await getPostPrimic(String(slug));
+  const post =null;// await getPostPrimic(String(slug));
 
   return {
     props: {
