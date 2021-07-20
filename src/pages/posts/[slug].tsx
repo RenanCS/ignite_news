@@ -29,12 +29,15 @@ export default function Post({ post }: IPostsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }): Promise<GetServerSidePropsResult<IPostsProps>> => {
-  const session = await getSession({ req });
-  console.dir(session);
+  console.log("DIR")
+  console.dir(req);
 
+  const session = await getSession({ req });
   const { slug } = params;
 
   if (!session?.activeSubscription) {
+    console.log(!session?.activeSubscription);
+    console.log("entrou aqui ")
     return {
       redirect: {
         destination: '/',
