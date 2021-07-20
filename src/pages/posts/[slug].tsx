@@ -1,12 +1,25 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { getSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/client";
 import { getPostPrimic } from "services/prismic";
 import { IPostsProps } from '.';
 import styles from './post.module.scss';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Post({ post }: IPostsProps) {
+  const [session] = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!session?.activeSubscription){
+      router.push(`/posts`);
+      return;
+    }
+
+  }, [post.slug, router, session])
+
   return (
     <>
       <Head>
@@ -29,15 +42,12 @@ export default function Post({ post }: IPostsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }): Promise<GetServerSidePropsResult<IPostsProps>> => {
-  console.log("DIR")
-  console.dir(req);
-
   const session = await getSession({ req });
   const { slug } = params;
 
-  if (session?.activeSubscription === null) {
-    console.log(!session?.activeSubscription);
-    console.log("entrou aqui ")
+  console.log(session?.activeSubscription);
+
+  if (session?.activeSubscription == null) {
     return {
       redirect: {
         destination: '/',
